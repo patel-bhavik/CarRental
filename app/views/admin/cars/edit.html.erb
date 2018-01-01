@@ -1,0 +1,6 @@
+<h1>Editing Car</h1>
+
+<%= render 'form', car: [:admin, @car] %>
+
+<%= link_to 'View Details', admin_car_path(@car) %> |
+<%= link_to 'Back', admin_cars_path %>

@@ -1,42 +1,33 @@
-<%= form_with(model: user, local: true) do |form| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<%= form_for @user do |form| %>
 
-      <ul>
-      <% user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render 'shared/error_messages' %>
 
   <div class="field">
     <%= form.label :email %>
-    <%= form.text_field :email, id: :user_email %>
+    <%= form.email_field :email, id: :user_email, :placeholder => 'Email', class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :first_name %>
-    <%= form.text_field :first_name, id: :user_first_name %>
+    <%= form.text_field :first_name, id: :user_first_name, :placeholder => 'First Name', class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :last_name %>
-    <%= form.text_field :last_name, id: :user_last_name %>
+    <%= form.text_field :last_name, id: :user_last_name, :placeholder => 'Last Name', class: 'form-control' %>
   </div>
 
   <div class="field">
-    <%= form.label :role %>
-    <%= form.text_field :role, id: :user_role %>
+    <%= form.label :password %>
+    <%= form.password_field :password, id: :user_password, :placeholder => 'Password (minimum 6 characters)', class: 'form-control' %>
   </div>
 
   <div class="field">
-    <%= form.label :password_digest %>
-    <%= form.text_field :password_digest, id: :user_password_digest %>
+    <%= form.label :confirm_password %>
+    <%= form.password_field :password_confirmation, id: :user_password, :placeholder => 'Confirm Password (minimum 6 characters)', class: 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit form_for == :signup ? 'Sign up' : 'Save', class: 'btn-submit' %>
   </div>
 <% end %>

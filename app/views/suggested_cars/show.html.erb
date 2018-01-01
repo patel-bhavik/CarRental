@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Suggesting User:</strong>
+  <%= @suggested_car.user_name %>
+</p>
+
+<p>
+  <strong>Manufacturer:</strong>
+  <%= @suggested_car.manufacturer %>
+</p>
+
+<p>
+  <strong>Model:</strong>
+  <%= @suggested_car.model %>
+</p>
+
+<p>
+  <strong>Style:</strong>
+  <%= @suggested_car.style.humanize %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @suggested_car.location %>
+</p>
+
+<%= link_to 'Accept', admin_new_suggested_car_path(@suggested_car) %> |
+<%= link_to 'Reject', edit_suggested_car_path(@suggested_car) %>

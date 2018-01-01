@@ -1,0 +1,71 @@
+<div class="pull-right">
+  <h3>Customer Information</h3>
+  <p>
+    <strong>Email:</strong>
+    <%= @reservation.user.email %>
+  </p>
+
+  <p>
+    <strong>First name:</strong>
+    <%= @reservation.user.first_name %>
+  </p>
+
+  <p>
+    <strong>Last name:</strong>
+    <%= @reservation.user.last_name %>
+  </p>
+</div>
+
+<div>
+  <h3>Car Information</h3>
+  <p>
+    <strong>Licence no:</strong>
+    <%= @reservation.car.licence_no %>
+  </p>
+
+  <p>
+    <strong>Manufacturer:</strong>
+    <%= @reservation.car.manufacturer %>
+  </p>
+
+  <p>
+    <strong>Model:</strong>
+    <%= @reservation.car.model %>
+  </p>
+
+  <p>
+    <strong>Style:</strong>
+    <%= @reservation.car.style.humanize %>
+  </p>
+
+  <p>
+    <strong>Hourly rate:</strong>
+    <%= @reservation.car.hourly_rate %>
+  </p>
+
+  <p>
+    <strong>Location:</strong>
+    <%= @reservation.car.location %>
+  </p>
+</div>
+
+<div>
+  <h3>Reservation Information</h3>
+  <p>
+    <strong>From:</strong>
+    <%= @reservation.from %>
+  </p>
+
+  <p>
+    <strong>To:</strong>
+    <%= @reservation.to %>
+  </p>
+
+  <p>
+    <strong>Rental charge:</strong>
+    <%= @reservation.rental_charge %>
+  </p>
+</div>
+
+<%= link_to 'Edit', edit_admin_reservation_path(@reservation) %> |
+<%= link_to 'Back', admin_reservations_path %>

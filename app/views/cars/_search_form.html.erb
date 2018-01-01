@@ -1,0 +1,7 @@
+<%= form_with(local: true, method: 'get') do |form| %>
+    <%= form.text_field :query, id: :car_query, :placeholder => 'Search' %>
+    <%= form.select :status, Car.attribute_names.select { |x|  x.in?(["manufacturer","style","status","location","model"])  }, id: :car_attr %>
+    <%= form.button 'Search', class: 'btn btn-default' do %>
+        <span class="glyphicon glyphicon-search"></span>
+    <% end %>
+<% end %>

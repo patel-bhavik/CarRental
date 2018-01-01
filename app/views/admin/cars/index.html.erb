@@ -1,0 +1,44 @@
+<h1>Cars</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Licence no</th>
+      <th>Manufacturer</th>
+      <th>Model</th>
+      <th>Style</th>
+      <th>Hourly rate</th>
+      <th>Location</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cars.each do |car| %>
+      <tr>
+        <td><%= car.licence_no %></td>
+        <td><%= car.manufacturer %></td>
+        <td><%= car.model %></td>
+        <td><%= car.style.humanize %></td>
+        <td><%= car.hourly_rate %></td>
+        <td><%= car.location %></td>
+        <td><%= car.status.humanize %></td>
+        <td><%= link_to 'View Details', admin_car_path(car) %></td>
+        <td><%= link_to 'Reservations', admin_car_reservation_history_path(car) %></td>
+        <td><%= link_to 'Edit', edit_admin_car_path(car) %></td>
+        <td><%= link_to 'Destroy', admin_car_path(car), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @cars %>
+<br>
+
+<h5><%= link_to 'Create a New Car', new_admin_car_path %></h5>
+<br>
+<% if suggested_car_exist? %>
+  <h5>User have suggested few cars.</h5>
+  <h5><%= link_to 'View Suggestions', suggested_cars_path %></h5>
+<% end %>

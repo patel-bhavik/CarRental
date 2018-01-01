@@ -1,0 +1,28 @@
+<%= form_for [:super_admin, @user] do |form| %>
+
+  <%= render 'shared/error_messages' %>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.email_field :email, id: :user_email, :placeholder => 'Email', class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name, id: :user_first_name, :placeholder => 'First Name', class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name, id: :user_last_name, :placeholder => 'Last Name', class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password %>
+    <%= form.password_field :password, id: :user_password, :placeholder => 'Password', class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

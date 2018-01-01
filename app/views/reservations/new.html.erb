@@ -1,5 +1,5 @@
-<h1>New Reservation</h1>
-
-<%= render 'form', reservation: @reservation %>
-
-<%= link_to 'Back', reservations_path %>
+<br>
+<h4>New Reservation for <%=@user.first_name %> for <%= @car.manufacturer %>,<%= @car.model %></h4>
+<br>
+<%= render 'form', reservation: @reservation%>
+<%= link_to 'Back', car_path(@car.id) %>

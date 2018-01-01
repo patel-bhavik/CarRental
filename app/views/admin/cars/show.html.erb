@@ -1,0 +1,38 @@
+<p>
+  <strong>Licence no:</strong>
+  <%= @car.licence_no %>
+</p>
+
+<p>
+  <strong>Manufacturer:</strong>
+  <%= @car.manufacturer %>
+</p>
+
+<p>
+  <strong>Model:</strong>
+  <%= @car.model %>
+</p>
+
+<p>
+  <strong>Style:</strong>
+  <%= @car.style.humanize %>
+</p>
+
+<p>
+  <strong>Hourly rate:</strong>
+  <%= @car.hourly_rate %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @car.location %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @car.status.humanize %>
+</p>
+
+<%= link_to 'Reservation History', admin_car_reservation_history_path(@car) %> |
+<%= link_to 'Edit', edit_admin_car_path(@car) %> |
+<%= link_to 'Back', admin_cars_path %>

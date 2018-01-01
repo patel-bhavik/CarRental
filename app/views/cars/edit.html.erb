@@ -1,6 +1,43 @@
-<h1>Editing Car</h1>
+<% if @current_car.reserved? %>
+    <p>Checking out the following car.</p>
+<% end %>
+<% if @current_car.checked_out? %>
+    <p>Returning the following car.</p>
+<% end %>
 
-<%= render 'form', car: @car %>
+<p>
+  <strong>Licence no:</strong>
+  <%= @current_car.licence_no %>
+</p>
 
-<%= link_to 'Show', @car %> |
-<%= link_to 'Back', cars_path %>
+<p>
+  <strong>Manufacturer:</strong>
+  <%= @current_car.manufacturer %>
+</p>
+
+<p>
+  <strong>Model:</strong>
+  <%= @current_car.model %>
+</p>
+
+<p>
+  <strong>Style:</strong>
+  <%= @current_car.style %>
+</p>
+
+<p>
+  <strong>Hourly rate:</strong>
+  <%= @current_car.hourly_rate %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @current_car.location %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @current_car.status.humanize %>
+</p>
+
+<%= render 'edit_form', car: @current_car, form_for: :edit %>

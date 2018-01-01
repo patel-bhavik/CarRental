@@ -1,0 +1,12 @@
+<%= form_for [:admin, @car], url: admin_car_update_status_path do |form| %>
+  <% if @car.reserved? %>
+        <div class="actions">
+          <%= form.submit 'Check Out', class: 'btn-submit' %>
+        </div>
+  <% end %>
+  <% if @car.checked_out? %>
+        <div class="actions">
+          <%= form.submit 'Return', class: 'btn-submit' %>
+        </div>
+  <% end %>
+<% end %>

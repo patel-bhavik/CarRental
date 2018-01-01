@@ -1,0 +1,6 @@
+<h1>Editing Reservation</h1>
+
+<%= render 'edit_form', reservation: [:admin, @reservation] %>
+
+<%= link_to 'Show', admin_reservation_path(@reservation) %> |
+<%= link_to 'Back', admin_reservations_path %>

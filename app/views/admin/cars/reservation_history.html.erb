@@ -1,0 +1,70 @@
+<h2>Reservation History</h2>
+<p>
+  <strong>Licence no:</strong>
+  <%= @car.licence_no %>
+</p>
+
+<p>
+  <strong>Manufacturer:</strong>
+  <%= @car.manufacturer %>
+</p>
+
+<p>
+  <strong>Model:</strong>
+  <%= @car.model %>
+</p>
+
+<p>
+  <strong>Style:</strong>
+  <%= @car.style.humanize %>
+</p>
+
+<p>
+  <strong>Hourly rate:</strong>
+  <%= @car.hourly_rate %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @car.location %>
+</p>
+
+<p>
+  <strong>Current Status:</strong>
+  <%= @car.status.humanize %>
+</p>
+<br>
+<% if !@reservations.exists? %>
+    <h5 style="text-indent: 35px">This car does not have a reservation history.</h5>
+<% else %>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Email</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>From Time</th>
+        <th>To Time</th>
+        <th>Rental Charge</th>
+        <th colspan="3"></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @reservations.each do |reservation| %>
+          <tr>
+            <td><%= reservation.user.email %></td>
+            <td><%= reservation.user.first_name %></td>
+            <td><%= reservation.user.last_name %></td>
+            <td><%= reservation.from %></td>
+            <td><%= reservation.to %></td>
+            <td><%= reservation.rental_charge %></td>
+            <td><%= link_to 'Show Details', admin_reservation_path(reservation) %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% end %>
+
+<br>
+<%= link_to 'Back', admin_cars_path %>

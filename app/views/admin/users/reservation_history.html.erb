@@ -1,0 +1,76 @@
+<br>
+<h4>Current Reservation</h4>
+<% if @current_reservation %>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Licence no</th>
+      <th>Manufacturer</th>
+      <th>Model</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Rental Charge</th>
+      <th colspan="3"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td><%= @current_reservation.car.licence_no %></td>
+      <td><%= @current_reservation.car.manufacturer %></td>
+      <td><%= @current_reservation.car.model %></td>
+      <td><%= @current_reservation.from %></td>
+      <td><%= @current_reservation.to %></td>
+      <td><%= @current_reservation.rental_charge %></td>
+      <% if @current_reservation.car.reserved? %>
+          <% if @current_reservation.valid_time_to_check_out? %>
+              <td><%= link_to 'Check out car', admin_car_edit_status_path(@current_reservation.car) %></td>
+          <% end %>
+          <td><%= link_to 'Cancel Reservation', admin_reservation_path(@current_reservation), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+      <% if @current_reservation.car.checked_out? %>
+          <td><%= link_to 'Return car', admin_car_edit_status_path(@current_reservation.car) %></td>
+      <% end %>
+    </tr>
+    </tbody>
+  </table>
+  <% if @current_reservation.car.reserved? and !@current_reservation.valid_time_to_check_out? %>
+      <h5 style="text-indent: 35px">Checkout link will be available before 10 minutes of your reservation.</h5>
+  <% end %>
+<% else %>
+  <h5 style="text-indent: 35px">The user does not have any current reservation.</h5>
+  <%= link_to 'Create reservation', new_admin_user_reservation_path(@user) %>
+<% end %>
+<h4>Reservation History</h4>
+<% if @reservations %>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Licence no</th>
+      <th>Manufacturer</th>
+      <th>Model</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Rental Charge</th>
+      <th colspan="3"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @reservations.each do |reservation| %>
+        <tr>
+          <td><%= reservation.car.licence_no %></td>
+          <td><%= reservation.car.manufacturer %></td>
+          <td><%= reservation.car.model %></td>
+          <td><%= reservation.from %></td>
+          <td><%= reservation.to %></td>
+          <td><%= reservation.rental_charge %></td>
+          <td><%= link_to 'Show Details', admin_reservation_path(reservation) %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+    <h5 style="text-indent: 35px">The user does not have a reservation history.</h5>
+<% end %>
+<br>
+<%= link_to 'Back', admin_customers_path %>

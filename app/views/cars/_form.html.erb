@@ -1,52 +1,48 @@
 <%= form_with(model: car, local: true) do |form| %>
-  <% if car.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(car.errors.count, "error") %> prohibited this car from being saved:</h2>
+    <% if car.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(car.errors.count, "error") %> prohibited this car from being saved:</h2>
 
-      <ul>
-      <% car.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% car.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :licence_no %>
+      <%= form.text_field :licence_no, id: :car_licence_no %>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :licence_no %>
-    <%= form.text_field :licence_no, id: :car_licence_no %>
-  </div>
+    <div class="field">
+      <%= form.label :manufacturer %>
+      <%= form.text_field :manufacturer, id: :car_manufacturer, :placeholder => @car.manufacturer  %>
+    </div>
 
-  <div class="field">
-    <%= form.label :manufacturer %>
-    <%= form.text_field :manufacturer, id: :car_manufacturer %>
-  </div>
+    <div class="field">
+      <%= form.label :model %>
+      <%= form.text_field :model, id: :car_model %>
+    </div>
 
-  <div class="field">
-    <%= form.label :model %>
-    <%= form.text_field :model, id: :car_model %>
-  </div>
+    <div class="field">
+      <%= form.label :style %>
+      <%= form.select :style, Car.styles.values, id: :car_style %>
+    </div>
 
-  <div class="field">
-    <%= form.label :style %>
-    <%= form.text_field :style, id: :car_style %>
-  </div>
+    <div class="field">
+      <%= form.label :hourly_rate %>
+      <%= form.text_field :hourly_rate, id: :car_hourly_rate %>
+    </div>
 
-  <div class="field">
-    <%= form.label :location %>
-    <%= form.text_field :location, id: :car_location %>
-  </div>
+    <div class="field">
+      <%= form.label :location %>
+      <%= form.text_field :location, id: :car_location %>
+    </div>
 
-  <div class="field">
-    <%= form.label :hourly_rate %>
-    <%= form.text_field :hourly_rate, id: :car_hourly_rate %>
-  </div>
+    <div class="actions">
+      <%= form.submit form_for == :cars ? 'Add' : 'Save', class: 'btn-submit' %>
+    </div>
 
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.text_field :status, id: :car_status %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>

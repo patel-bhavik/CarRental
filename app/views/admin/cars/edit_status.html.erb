@@ -1,0 +1,43 @@
+<% if @car.reserved? %>
+    <p>Checking out following car.</p>
+<% end %>
+<% if @car.checked_out? %>
+    <p>Returning following car.</p>
+<% end %>
+
+<p>
+  <strong>Licence no:</strong>
+  <%= @car.licence_no %>
+</p>
+
+<p>
+  <strong>Manufacturer:</strong>
+  <%= @car.manufacturer %>
+</p>
+
+<p>
+  <strong>Model:</strong>
+  <%= @car.model %>
+</p>
+
+<p>
+  <strong>Style:</strong>
+  <%= @car.style %>
+</p>
+
+<p>
+  <strong>Hourly rate:</strong>
+  <%= @car.hourly_rate %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @car.location %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @car.status.humanize %>
+</p>
+
+<%= render 'edit_form', car: [:admin, @car ] %>

@@ -1,39 +1,89 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Cars</h1>
-
-<table>
-  <thead>
+<div class="search">
+  <br>
+  <h4>Current Reservation</h4>
+  <% if @reservation = user_reservation %>
+      <% @current_car = Car.find(@reservation.car_id)%>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Licence no</th>
+          <th>Manufacturer</th>
+          <th>Model</th>
+          <th>Style</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Rental Charge</th>
+          <th colspan="3"></th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @current_car.licence_no %></td>
+            <td><%= @current_car.manufacturer %></td>
+            <td><%= @current_car.model %></td>
+            <td><%= @current_car.style.humanize %></td>
+            <td><%= @reservation.from %></td>
+            <td><%= @reservation.to %></td>
+            <td><%= @reservation.rental_charge %></td>
+            <% if @current_car.reserved?%>
+                <% if @reservation.valid_time_to_check_out? %>
+                  <td><%= link_to 'Check out car', edit_car_path(@current_car) %></td>
+                <% end %>
+                <td><%= link_to 'Cancel Reservation', car_reservation_path(@current_car,@reservation), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+            <% if @current_car.checked_out? %>
+                <td><%= link_to 'Return car', edit_car_path(@current_car) %></td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+      <% if @current_car.reserved? and !@reservation.valid_time_to_check_out? %>
+          <h5 style="text-indent: 35px">Checkout link will be available before 10 minutes of your reservation. &nbsp;&nbsp;&nbsp; <%= link_to "Reload", root_path %></h5>
+      <% end %>
+  <% else %>
+      <h5 style="text-indent: 35px">You don't have any current reservation.</h5>
+  <% end %>
+  <br>
+  <h4>Reservation History</h4>
+    <h5 style="text-indent: 35px"><%= link_to 'View History', reservation_history_path %></h5>
+  <br>
+  <%= render 'search_form' %>
+  <table class="table">
+    <thead>
     <tr>
-      <th>Licence no</th>
       <th>Manufacturer</th>
       <th>Model</th>
       <th>Style</th>
-      <th>Location</th>
       <th>Hourly rate</th>
+      <th>Location</th>
       <th>Status</th>
       <th colspan="3"></th>
     </tr>
-  </thead>
+    </thead>
 
-  <tbody>
+    <tbody>
     <% @cars.each do |car| %>
-      <tr>
-        <td><%= car.licence_no %></td>
-        <td><%= car.manufacturer %></td>
-        <td><%= car.model %></td>
-        <td><%= car.style %></td>
-        <td><%= car.location %></td>
-        <td><%= car.hourly_rate %></td>
-        <td><%= car.status %></td>
-        <td><%= link_to 'Show', car %></td>
-        <td><%= link_to 'Edit', edit_car_path(car) %></td>
-        <td><%= link_to 'Destroy', car, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <tr>
+          <td><%= car.manufacturer %></td>
+          <td><%= car.model %></td>
+          <td><%= car.style.humanize %></td>
+          <td><%= car.hourly_rate %></td>
+          <td><%= car.location %></td>
+          <td><%= car.status.humanize %></td>
+          <td><%= link_to 'Details', car %></td>
+          <% if car.available? and !user_reservation %>
+              <td><%= link_to 'Rent This Car', new_car_reservation_path(car) %></td>
+          <% end %>
+          <% if !car.available? and !checked_out_by_current_user?(car) and !user_subscription(car)  %>
+              <td><%= link_to 'Notify when available', new_subscription_path(car.id) %></td>
+          <% end %>
+        </tr>
     <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
 
-<br>
+  <%= will_paginate @cars %>
 
-<%= link_to 'New Car', new_car_path %>
+  <h5>Did not like our collection of Cars? Suggest a Car to us.</h5>
+  <h5><%= link_to 'Suggest a Car', new_suggested_car_path %></h5>
+</div>

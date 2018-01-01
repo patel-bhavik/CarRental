@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Licence no:</strong>
   <%= @car.licence_no %>
@@ -17,12 +15,7 @@
 
 <p>
   <strong>Style:</strong>
-  <%= @car.style %>
-</p>
-
-<p>
-  <strong>Location:</strong>
-  <%= @car.location %>
+  <%= @car.style.humanize %>
 </p>
 
 <p>
@@ -31,9 +24,16 @@
 </p>
 
 <p>
-  <strong>Status:</strong>
-  <%= @car.status %>
+  <strong>Location:</strong>
+  <%= @car.location %>
 </p>
 
-<%= link_to 'Edit', edit_car_path(@car) %> |
-<%= link_to 'Back', cars_path %>
+<p>
+  <strong>Status:</strong>
+  <%= @car.status.humanize %>
+</p>
+
+<% if @car.available? and !user_reservation %>
+  <%= link_to 'Rent This Car', new_car_reservation_path(@car) %> |
+<% end %>
+<%= link_to 'Back', root_path %>

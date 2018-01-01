@@ -1,0 +1,25 @@
+<%# navigation styled for Bootstrap 3.0 %>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <% if logged_in? and @current_user.customer? %>
+        <%= link_to 'Home', root_path, class: 'navbar-brand' %>
+      <% else %>
+          <% if logged_in? %>
+            <%= link_to 'Home', admin_cars_path, class: 'navbar-brand' %>
+          <% end %>
+      <% end %>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav" style="float: right">
+        <%= render 'layouts/navigation_links' %>
+      </ul>
+    </div>
+  </div>
+</nav>
